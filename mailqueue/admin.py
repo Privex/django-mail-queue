@@ -1,6 +1,6 @@
 from django.contrib import admin, messages
 from django.contrib.messages import add_message
-from django.utils.translation import ugettext_lazy as _
+from django.utils.translation import gettext_lazy as _
 
 from .models import MailerMessage, Attachment
 
