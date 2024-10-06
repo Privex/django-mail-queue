@@ -40,7 +40,7 @@ class MailerMessage(models.Model):
     created = models.DateTimeField(_('Created'), auto_now_add=True, auto_now=False,
                                    editable=False, null=True)
     subject = models.CharField(_('Subject'), max_length=250, blank=True)
-    to_address = models.TextField(_('To'))
+    to_address = models.TextField(_('To'), db_index=True)
     cc_address = models.TextField(_('CC'), blank=True)
     bcc_address = models.TextField(_('BCC'), blank=True)
     from_address = models.EmailField(_('From'), max_length=250)
@@ -48,7 +48,7 @@ class MailerMessage(models.Model):
     content = models.TextField(_('Content'), blank=True)
     html_content = models.TextField(_('HTML Content'), blank=True)
     app = models.CharField(_('App'), max_length=250, blank=True)
-    sent = models.BooleanField(_('Sent'), default=False, editable=True)
+    sent = models.BooleanField(_('Sent'), default=False, editable=True, db_index=True)
     last_attempt = models.DateTimeField(_('Last attempt'), auto_now=False, auto_now_add=False,
                                         blank=True, null=True, editable=False)
 
@@ -133,7 +133,7 @@ class MailerMessage(models.Model):
                 self.sent = True
             except Exception as e:
                 self.do_not_send = True
-                logger.error('Mail Queue Exception: {0}'.format(e))
+                logger.exception('Mail Queue Exception: {0}'.format(e))
             self.save()
 
 
