@@ -39,12 +39,12 @@ class MailerMessageManager(models.Manager):
 class MailerMessage(models.Model):
     created = models.DateTimeField(_('Created'), auto_now_add=True, auto_now=False,
                                    editable=False, null=True)
-    subject = models.CharField(_('Subject'), max_length=250, blank=True)
-    to_address = models.TextField(_('To'), db_index=True)
-    cc_address = models.TextField(_('CC'), blank=True)
-    bcc_address = models.TextField(_('BCC'), blank=True)
-    from_address = models.EmailField(_('From'), max_length=250)
-    reply_to = models.TextField(_('Reply to'), max_length=250, blank=True, null=True)
+    subject = models.CharField(_('Subject'), max_length=250, blank=True, db_index=True)
+    to_address = models.CharField(_('To'), max_length=250, db_index=True)
+    cc_address = models.CharField(_('CC'), max_length=250, blank=True)
+    bcc_address = models.CharField(_('BCC'), max_length=250, blank=True)
+    from_address = models.CharField(_('From'), max_length=250, db_index=True)
+    reply_to = models.CharField(_('Reply to'), max_length=250, blank=True, null=True)
     content = models.TextField(_('Content'), blank=True)
     html_content = models.TextField(_('HTML Content'), blank=True)
     app = models.CharField(_('App'), max_length=250, blank=True)
